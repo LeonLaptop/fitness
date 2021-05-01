@@ -1,5 +1,8 @@
 # login_screen
 
+Clone GitHub Repository:
+https://github.com/LeonLaptop/fitness.git
+
 A new Flutter project.
 
 ## Getting Started
