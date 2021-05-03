@@ -1,53 +1,122 @@
 import 'package:flutter/material.dart';
 import 'package:login_screen/assets/colors.dart';
 import 'package:login_screen/assets/textstyle.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class SignScreen extends StatefulWidget {
   @override
   _SignScreenState createState() => _SignScreenState();
 }
 
+final List<String> header = [
+  "Start your 60 second challenge. Every day!",
+  "Lorem ipsum dolor sit amet, consetetur",
+  "vero eos et accusam et justo duo dolores et",
+];
+
+final List<String> subHeader = [
+  "Lorem ipsum dolor sit amet, consetetur sadipscing eli",
+  "Lorem ipsum dolor sit amet, consetetur sadipscing eli",
+  "Lorem ipsum dolor sit amet, consetetur sadipscing eli",
+];
+
+final List<Icon> icons = [
+  Icon(Icons.photo, size: 50.0,),
+  Icon(Icons.sports,size: 50.0,),
+  Icon(Icons.food_bank,size: 50.0,),
+];
+
 class _SignScreenState extends State<SignScreen> {
+  int _current = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          color: Colors.white,
           width: double.infinity,
-          margin: EdgeInsets.only(top: 100.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 110.0,
-                width: 110.0,
-                decoration: BoxDecoration(
-                  color: darkBlackColor,
-                  borderRadius: BorderRadius.circular(25.0),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 375.0,
+                      viewportFraction: 1.0,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _current = index;
+                        });
+                      }),
+                  items: [0, 1, 2].map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: BoxDecoration(color: Colors.white),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 200.0,
+                                width: 200.0,
+                                decoration: BoxDecoration(
+                                  color: ligthGreyColor,
+                                  borderRadius: BorderRadius.circular(200.0),
+                                ),
+                                child: Center(
+                                    child: icons[i]),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 30.0, bottom: 15.0),
+                                child: Container(
+                                  width: 300.0,
+                                  child: Text(header[i],
+                                      textAlign: TextAlign.center,
+                                      style: signHeader),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom:30.0),
+                                child: Container(
+                                  width: 250.0,
+                                  child: Text(
+                                    subHeader[i],
+                                    textAlign: TextAlign.center,
+                                    style: signSubHeader,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  }).toList(),
                 ),
-                child: Center(
-                  child: Text(
-                    "FIT",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 4.0),
-                  ),
+                // Show slider Controll
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: header.map((i) {
+                    int index = header.indexOf(i);
+                    return Container(
+                      width: 10.0,
+                      height: 10.0,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 4.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: _current == index
+                            ? darkBlueColor
+                            : ligthGreyColor
+                      ),
+                    );
+                  }).toList(),
                 ),
-              ),
-              Container(child: Text("60fit.io")),
-              Container(
-                  width: 275.0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 25.0),
-                    child: Text(
-                      "Start your 60 second challenge, every day!",
-                      textAlign: TextAlign.center,
-                      style: signHeader,
-                    ),
-                  ))
-            ],
+              ],
+            ),
           ),
         ),
       ),

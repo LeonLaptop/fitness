@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Color(0xffedf0f5),
               child: Column(
                 children: [
-                  Topbar(),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
