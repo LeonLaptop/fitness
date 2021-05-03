@@ -9,15 +9,15 @@ class SignScreen extends StatefulWidget {
 }
 
 final List<String> header = [
-  "Start your 60 second challenge. Every day!",
-  "Lorem ipsum dolor sit amet, consetetur",
-  "vero eos et accusam et justo duo dolores et",
+  "Start your 60 second \nchallenge. Every day!",
+  "Lorem ipsum dolor sit \namet, consetetur",
+  "vero eos et accusam et ?\njusto duo dolores et",
 ];
 
 final List<String> subHeader = [
-  "Lorem ipsum dolor sit amet, consetetur sadipscing eli",
-  "Lorem ipsum dolor sit amet, consetetur sadipscing eli",
-  "Lorem ipsum dolor sit amet, consetetur sadipscing eli",
+  "Lorem ipsum dolor sit amet,\n consetetur sadipscing eli",
+  "Lorem ipsum dolor sit amet,\n consetetur sadipscing eli",
+  "Lorem ipsum dolor sit amet,\n consetetur sadipscing eli",
 ];
 
 final List<Icon> icons = [
@@ -37,7 +37,7 @@ class _SignScreenState extends State<SignScreen> {
           color: Colors.white,
           width: double.infinity,
           child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 60.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -72,7 +72,6 @@ class _SignScreenState extends State<SignScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 30.0, bottom: 15.0),
                                 child: Container(
-                                  width: 300.0,
                                   child: Text(header[i],
                                       textAlign: TextAlign.center,
                                       style: signHeader),
@@ -81,7 +80,6 @@ class _SignScreenState extends State<SignScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(bottom:30.0),
                                 child: Container(
-                                  width: 250.0,
                                   child: Text(
                                     subHeader[i],
                                     textAlign: TextAlign.center,
