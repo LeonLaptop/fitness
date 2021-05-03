@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:login_screen/assets/colors.dart';
+import 'package:login_screen/assets/textstyle.dart';
 
 class SignScreen extends StatefulWidget {
   @override
@@ -13,7 +16,7 @@ class _SignScreenState extends State<SignScreen> {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          margin: EdgeInsets.only(top: 130.0),
+          margin: EdgeInsets.only(top: 100.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -35,11 +38,16 @@ class _SignScreenState extends State<SignScreen> {
                   ),
                 ),
               ),
+              Container(child: Text("60fit.io")),
               Container(
-                  width: 200.0,
-                  child: Text(
-                    "Start you 60 second challenge, every day!",
-                    textAlign: TextAlign.center,
+                  width: 275.0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 25.0),
+                    child: Text(
+                      "Start you 60 second challenge, every day!",
+                      textAlign: TextAlign.center,
+                      style: signHeader,
+                    ),
                   ))
             ],
           ),
