@@ -6,3 +6,5 @@ const Color darkBlueColor = Color(0xff14213d);
 const Color ligthBlueColor = Color(0xff2176ff);
 const Color yellowColor = Color(0xfffdc500);
 const Color darkBlackColor = Color(0xff00171f);
+const Color ligthRedColor = Color(0xfffeeeeb);
+const Color ligthBlue2Color = Color(0xffe1f1f6);

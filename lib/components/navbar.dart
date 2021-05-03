@@ -3,17 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:login_screen/assets/colors.dart';
 import 'package:login_screen/screens/home_screen.dart';
 import 'package:login_screen/screens/profile_screen.dart';
+import 'package:login_screen/screens/feddback_screen.dart';
 import 'package:login_screen/screens/sign_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 PersistentTabController myController = PersistentTabController(initialIndex: 0);
 
 List<Widget> _buildScreens() {
-  return [HomeScreen(), ProfileScreen(), SignScreen()];
+  return [SignScreen(), HomeScreen(), ProfileScreen(), FeedbackScreen()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
   return [
+    PersistentBottomNavBarItem(
+      icon: Icon(CupertinoIcons.app_badge_fill),
+      title: ("Sign"),
+      activeColorPrimary: darkBlackColor,
+      inactiveColorPrimary: CupertinoColors.systemGrey,
+    ),
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.home),
       title: ("Home"),
@@ -28,7 +35,7 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     ),
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.signature),
-      title: ("Sign"),
+      title: ("feedback"),
       activeColorPrimary: darkBlackColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
