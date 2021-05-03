@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:login_screen/assets/colors.dart';
 import 'package:login_screen/assets/textstyle.dart';
@@ -44,7 +42,7 @@ class _SignScreenState extends State<SignScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 25.0),
                     child: Text(
-                      "Start you 60 second challenge, every day!",
+                      "Start your 60 second challenge, every day!",
                       textAlign: TextAlign.center,
                       style: signHeader,
                     ),
