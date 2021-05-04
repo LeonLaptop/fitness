@@ -76,3 +76,36 @@ class SignUpLoginButton extends StatelessWidget {
   }
 }
 
+//===============================================================================\\
+
+class SignUpButton extends StatelessWidget {
+  const SignUpButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: double.infinity,
+        height: 60.0,
+        decoration: BoxDecoration(
+          color: darkBlueColor,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left:20.0),
+              child: Text("Create account", style: whiteBoldText,),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+

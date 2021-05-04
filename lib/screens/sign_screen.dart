@@ -23,15 +23,15 @@ final List<String> subHeader = [
 
 final List<Icon> icons = [
   Icon(
-    Icons.photo,
+    Icons.self_improvement,
     size: 50.0,
   ),
   Icon(
-    Icons.sports,
+    Icons.sports_baseball,
     size: 50.0,
   ),
   Icon(
-    Icons.food_bank,
+    Icons.insights,
     size: 50.0,
   ),
 ];
@@ -53,7 +53,8 @@ class _SignScreenState extends State<SignScreen> {
               children: [
                 CarouselSlider(
                   options: CarouselOptions(
-                      height: 375.0,
+                    autoPlay: true,
+                      height: 350.0,
                       viewportFraction: 1.0,
                       onPageChanged: (index, reason) {
                         setState(() {
@@ -70,8 +71,8 @@ class _SignScreenState extends State<SignScreen> {
                           child: Column(
                             children: [
                               Container(
-                                height: 200.0,
-                                width: 200.0,
+                                height: 170.0,
+                                width: 170.0,
                                 decoration: BoxDecoration(
                                   color: ligthGreyColor,
                                   borderRadius: BorderRadius.circular(200.0),
@@ -122,70 +123,72 @@ class _SignScreenState extends State<SignScreen> {
                   }).toList(),
                 ),
                 Expanded(
-                    child: Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
+                    child: Center(
+                      child: Padding(
+                  padding: const EdgeInsets.only(top: 60.0),
                   child: Container(
-                    child: Column(
-                      children: [
-                        GoogleSignButton(),
-                        Container(
-                          margin: EdgeInsets.only(left: 25.0, right: 25.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: SignUpLoginButton(
-                                  title: "Sign Up",
-                                  printInput: "Sign In",
-                                ),
-                              ),
-                              SizedBox(
-                                width: 20.0,
-                              ),
-                              Expanded(
-                                child: SignUpLoginButton(
-                                    title: "Log In", printInput: "Log In"),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25.0),
-                          child: Container(
+                      child: Column(
+                        children: [
+                          GoogleSignButton(),
+                          Container(
+                            margin: EdgeInsets.only(left: 25.0, right: 25.0),
                             child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                GestureDetector(
-                                  onTap: () => print("Terms of Use"),
-                                  child: Text(
-                                    "Terms of Use",
-                                    style: smallBlueText,
+                                Expanded(
+                                  child: SignUpLoginButton(
+                                    title: "Sign Up",
+                                    printInput: "Sign In",
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10.0, right: 10.0),
-                                  child: Container(
-                                    height: 12.0,
-                                    width: 1.5,
-                                    color: darkBlueColor,
-                                  ),
+                                SizedBox(
+                                  width: 20.0,
                                 ),
-                                GestureDetector(
-                                  onTap: () => print("Privacy Policy"),
-                                  child: Text(
-                                    "Privacy Policy",
-                                    style: smallBlueText,
-                                  ),
-                                )
+                                Expanded(
+                                  child: SignUpLoginButton(
+                                      title: "Log In", printInput: "Log In"),
+                                ),
                               ],
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25.0),
+                            child: Container(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () => print("Terms of Use"),
+                                    child: Text(
+                                      "Terms of Use",
+                                      style: smallBlueText,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, right: 10.0),
+                                    child: Container(
+                                      height: 12.0,
+                                      width: 1.5,
+                                      color: darkBlueColor,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () => print("Privacy Policy"),
+                                    child: Text(
+                                      "Privacy Policy",
+                                      style: smallBlueText,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                   ),
-                ))
+                ),
+                    ))
               ],
             ),
           ),

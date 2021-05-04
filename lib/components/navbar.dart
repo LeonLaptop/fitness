@@ -5,12 +5,13 @@ import 'package:login_screen/screens/home_screen.dart';
 import 'package:login_screen/screens/profile_screen.dart';
 import 'package:login_screen/screens/feddback_screen.dart';
 import 'package:login_screen/screens/sign_screen.dart';
+import 'package:login_screen/screens/sign_up_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 PersistentTabController myController = PersistentTabController(initialIndex: 0);
 
 List<Widget> _buildScreens() {
-  return [SignScreen(), HomeScreen(), ProfileScreen(), FeedbackScreen()];
+  return [SignScreen(),SignUpScreen(), HomeScreen(), ProfileScreen(), FeedbackScreen()];
 }
 
 List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -18,6 +19,11 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       icon: Icon(CupertinoIcons.app_badge_fill),
       title: ("Sign"),
+      activeColorPrimary: darkBlackColor,
+      inactiveColorPrimary: CupertinoColors.systemGrey,
+    ),PersistentBottomNavBarItem(
+      icon: Icon(CupertinoIcons.app_badge_fill),
+      title: ("Signup"),
       activeColorPrimary: darkBlackColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
