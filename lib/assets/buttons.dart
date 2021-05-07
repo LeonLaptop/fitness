@@ -13,8 +13,7 @@ class GoogleSignButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => print("Im Taped"),
       child: Padding(
-        padding: const EdgeInsets.only(
-            left: 25.0, right: 25.0, bottom: 20.0),
+        padding: const EdgeInsets.only(left: 25.0, right: 25.0, bottom: 20.0),
         child: Container(
           width: double.infinity,
           height: 60.0,
@@ -31,8 +30,11 @@ class GoogleSignButton extends StatelessWidget {
                 color: Colors.white,
               ),
               Padding(
-                padding: const EdgeInsets.only(left:20.0),
-                child: Text("Sign Up with Google", style: whiteBoldText,),
+                padding: const EdgeInsets.only(left: 20.0),
+                child: Text(
+                  "Sign Up with Google",
+                  style: whiteBoldText,
+                ),
               )
             ],
           ),
@@ -44,17 +46,17 @@ class GoogleSignButton extends StatelessWidget {
 
 //===============================================================================\\
 
-
 class SignUpLoginButton extends StatelessWidget {
   final String title;
   final String printInput;
+  final Function onPressed;
 
-  SignUpLoginButton({this.title,this.printInput});
-  
+  SignUpLoginButton({this.title, this.printInput, this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print(printInput),
+      onTap: onPressed,
       child: Container(
         height: 60.0,
         decoration: BoxDecoration(
@@ -78,15 +80,21 @@ class SignUpLoginButton extends StatelessWidget {
 
 //===============================================================================\\
 
-class SignUpButton extends StatelessWidget {
-  const SignUpButton({
-    Key key,
-  }) : super(key: key);
+class SignUpButton extends StatefulWidget {
+  final Key buttonKey;
 
+  SignUpButton({
+    this.buttonKey,
+  });
+
+  @override
+  _SignUpButtonState createState() => _SignUpButtonState();
+}
+
+class _SignUpButtonState extends State<SignUpButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
       child: Container(
         width: double.infinity,
         height: 60.0,
@@ -99,8 +107,11 @@ class SignUpButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left:20.0),
-              child: Text("Create account", style: whiteBoldText,),
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Text(
+                "Create account",
+                style: whiteBoldText,
+              ),
             )
           ],
         ),
@@ -108,4 +119,3 @@ class SignUpButton extends StatelessWidget {
     );
   }
 }
-

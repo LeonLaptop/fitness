@@ -2,19 +2,40 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:login_screen/assets/buttons.dart';
+import 'package:login_screen/assets/colors.dart';
 import 'package:login_screen/assets/inputFields.dart';
 import 'package:login_screen/assets/textstyle.dart';
 import 'package:login_screen/components/topbar.dart';
 import 'package:login_screen/screens/sign_screen.dart';
+import 'package:wc_form_validators/wc_form_validators.dart';
 
 class SignUpScreen extends StatefulWidget {
+  final String data;
+
+  SignUpScreen({
+    Key key,
+    @required this.data,
+  }) : super(key: key);
+
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>();
+  bool encodedInput = true;
+  IconData icon = Icons.visibility;
 
-final _formKey = GlobalKey<FormState>();
+  void _showPW() {
+    setState(() {
+      encodedInput = !encodedInput;
+      if (encodedInput == true) {
+        icon = Icons.visibility;
+      } else {
+        icon = Icons.visibility_off;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +51,9 @@ final _formKey = GlobalKey<FormState>();
                 Topbar(
                   title: "",
                   iconLeft: CupertinoIcons.back,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
@@ -53,74 +77,208 @@ final _formKey = GlobalKey<FormState>();
                     key: _formKey,
                     child: Column(
                       children: [
+// =================================== Profile Formfield =================================== \\
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20.0),
-                          child: GreyTextField(
-                            hintTitle: "Username",
-                            encodedInput: false,
-                            icon: Icons.person,
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a Username!';
+                              }
+                              return null;
+                            },
+                            obscureText: false,
+                            textAlign: TextAlign.left,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.person),
+                              hintText: "Username",
+                              hintStyle: TextStyle(fontSize: 16),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                              filled: true,
+                              contentPadding: EdgeInsets.all(20),
+                              fillColor: ligthGreyColor,
+                            ),
                           ),
                         ),
+// =================================== Email Formfield =================================== \\
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20.0),
-                          child: GreyTextField(
-                              hintTitle: "Email",
-                              encodedInput: false,
-                              icon: Icons.mail),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 5.0),
-                          child: GreyTextPWField(
-                            hintTitle: "Password",
+                          child: TextFormField(
+                            validator: Validators.compose([
+                              Validators.email("Inalid email address."),
+                              Validators.required(
+                                  "Please enter a email address.")
+                            ]),
+                            obscureText: false,
+                            textAlign: TextAlign.left,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.email),
+                              hintText: "Email",
+                              hintStyle: TextStyle(fontSize: 16),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                              ),
+                              filled: true,
+                              contentPadding: EdgeInsets.all(20),
+                              fillColor: ligthGreyColor,
+                            ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 20.0),
+// =================================== Password Formfield =================================== \\
+                        TextFormField(
+                          validator: Validators.compose([
+                            Validators.minLength(
+                                8, 'Characters are less than 8'),
+                            Validators.required(
+                                "Please enter a valid password."),
+                          ]),
+                          autofocus: false,
+                          obscureText: encodedInput,
+                          textAlign: TextAlign.left,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            suffixIcon: GestureDetector(
+                              onTap: _showPW,
+                              child: Icon(icon),
+                            ),
+                            prefixIcon: Icon(Icons.lock),
+                            hintText: "Password",
+                            hintStyle: TextStyle(fontSize: 16),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              ),
+                            ),
+                            filled: true,
+                            contentPadding: EdgeInsets.all(20),
+                            fillColor: ligthGreyColor,
+                          ),
+                        ),
+                        PasswordRules(),
+// =================================== Password Formfield =================================== \\
+                        GestureDetector(
+                          onTap: () {
+                            if (_formKey.currentState.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Account is created."),
+                                ),
+                              );
+                            }
+                          },
                           child: Container(
-                            width: 300.0,
-                            child: Text(
-                                "Your password must be 8 or more characters long & contain a mix of upper & lower case letters; numbers or symbols.",
-                                style: smallText,
-                                textAlign: TextAlign.center),
+                            width: double.infinity,
+                            height: 60.0,
+                            decoration: BoxDecoration(
+                              color: darkBlueColor,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Text(
+                                    "Create account",
+                                    style: whiteBoldText,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        SignUpButton()
+                        )
                       ],
                     ),
                   ),
                 ),
+                SignUpPolicyTermsOfUse(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 35.0),
-                  child: Container(
-                    width: 240.0,
-                    child: RichText(
-                      textAlign: TextAlign.center,
+                  padding: const EdgeInsets.only(top: 100.0),
+                  child: RichText(
                       text: TextSpan(
-                        style: DefaultTextStyle.of(context).style,
-                        children: [
-                          TextSpan(text: "By signing up, you're agree to our"),
-                          TextSpan(
-                            text: " Terms of Use",
-                            style: smallBlackBoldText,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => print("Terms of Use"),
-                          ),
-                          TextSpan(text: " and "),
-                          TextSpan(
-                            text: "Privacy Policy.",
-                            style: smallBlackBoldText,
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => print("Privacy Policy"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                          style: DefaultTextStyle.of(context).style,
+                          children: [
+                        TextSpan(
+                            text: "Already have an account?",
+                            style: smallText12),
+                        TextSpan(text: " Sign in", style: smallBlackBoldText)
+                      ])),
+                )
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SignUpPolicyTermsOfUse extends StatelessWidget {
+  const SignUpPolicyTermsOfUse({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Container(
+        width: 240.0,
+        child: RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            style: DefaultTextStyle.of(context).style,
+            children: [
+              TextSpan(text: "By signing up, you're agree to our"),
+              TextSpan(
+                text: " Terms of Use",
+                style: smallBlackBoldText,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => print("Terms of Use"),
+              ),
+              TextSpan(text: " and "),
+              TextSpan(
+                text: "Privacy Policy.",
+                style: smallBlackBoldText,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => print("Privacy Policy"),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PasswordRules extends StatelessWidget {
+  const PasswordRules({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 20.0),
+      child: Container(
+        width: 300.0,
+        child: Text("Your password must be 8 or more characters long",
+            style: smallText, textAlign: TextAlign.center),
       ),
     );
   }

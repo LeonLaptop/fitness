@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_screen/components/navbar.dart';
+import 'package:login_screen/components/route_generator.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,11 +26,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: myColor,
       ),
-      home: NavbarScreen(),
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }

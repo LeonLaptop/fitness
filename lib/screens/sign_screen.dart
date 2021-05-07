@@ -3,6 +3,7 @@ import 'package:login_screen/assets/buttons.dart';
 import 'package:login_screen/assets/colors.dart';
 import 'package:login_screen/assets/textstyle.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:login_screen/screens/sign_up_screen.dart';
 
 class SignScreen extends StatefulWidget {
   @override
@@ -53,7 +54,7 @@ class _SignScreenState extends State<SignScreen> {
               children: [
                 CarouselSlider(
                   options: CarouselOptions(
-                    autoPlay: true,
+                      autoPlay: true,
                       height: 350.0,
                       viewportFraction: 1.0,
                       onPageChanged: (index, reason) {
@@ -124,9 +125,9 @@ class _SignScreenState extends State<SignScreen> {
                 ),
                 Expanded(
                     child: Center(
-                      child: Padding(
-                  padding: const EdgeInsets.only(top: 60.0),
-                  child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 60.0),
+                    child: Container(
                       child: Column(
                         children: [
                           GoogleSignButton(),
@@ -136,6 +137,10 @@ class _SignScreenState extends State<SignScreen> {
                               children: [
                                 Expanded(
                                   child: SignUpLoginButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed('/signup',
+                                          arguments: 'Hello im a Test');
+                                    },
                                     title: "Sign Up",
                                     printInput: "Sign In",
                                   ),
@@ -145,7 +150,12 @@ class _SignScreenState extends State<SignScreen> {
                                 ),
                                 Expanded(
                                   child: SignUpLoginButton(
-                                      title: "Log In", printInput: "Log In"),
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pushNamed('/login');
+                                      },
+                                      title: "Log In",
+                                      printInput: "Log In"),
                                 ),
                               ],
                             ),
@@ -186,9 +196,9 @@ class _SignScreenState extends State<SignScreen> {
                           )
                         ],
                       ),
+                    ),
                   ),
-                ),
-                    ))
+                ))
               ],
             ),
           ),

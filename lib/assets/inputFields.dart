@@ -6,7 +6,11 @@ class GreyTextField extends StatelessWidget {
   final bool encodedInput;
   final IconData icon;
 
-  GreyTextField({this.hintTitle, this.encodedInput, this.icon});
+  GreyTextField({
+    this.hintTitle,
+    this.encodedInput,
+    this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
