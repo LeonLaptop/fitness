@@ -56,14 +56,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                  padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
-                    "Sign Up",
+                    "Sign Up ✍",
                     style: signHeader,
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 15.0, bottom: 40.0),
+                  padding: EdgeInsets.only(top: 15.0, bottom: 20.0),
                   width: 300.0,
                   child: Text(
                     "Create an account to start your own 60 second challenge!",
@@ -208,16 +208,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 SignUpPolicyTermsOfUse(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 100.0),
+                  padding: const EdgeInsets.only(top: 80.0),
                   child: RichText(
-                      text: TextSpan(
-                          style: DefaultTextStyle.of(context).style,
-                          children: [
-                        TextSpan(
-                            text: "Already have an account?",
-                            style: smallText12),
-                        TextSpan(text: " Sign in", style: smallBlackBoldText)
-                      ])),
+                      text: TextSpan(children: [
+                    TextSpan(
+                        text: "Already have an account?",
+                        style: TextStyle(
+                            fontSize: 12,
+                            decoration: TextDecoration.none,
+                            color: darkBlueColor)),
+                    TextSpan(text: " Sign in", style: smallBlackBoldText)
+                  ])),
                 )
               ],
             ),
