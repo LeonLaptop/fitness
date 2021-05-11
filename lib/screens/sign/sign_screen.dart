@@ -3,7 +3,8 @@ import 'package:login_screen/assets/buttons.dart';
 import 'package:login_screen/assets/colors.dart';
 import 'package:login_screen/assets/textstyle.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:login_screen/screens/sign_up_screen.dart';
+import 'package:login_screen/screens/sign/sign_up_screen.dart';
+import 'package:login_screen/services/auth.dart';
 
 class SignScreen extends StatefulWidget {
   @override
@@ -38,6 +39,7 @@ final List<Icon> icons = [
 ];
 
 class _SignScreenState extends State<SignScreen> {
+  final AuthService _auth = AuthService();
   int _current = 0;
 
   @override
@@ -159,6 +161,26 @@ class _SignScreenState extends State<SignScreen> {
                                 ),
                               ],
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15.0),
+                            child: GestureDetector(
+                                onTap: () async {
+                                  dynamic result = await _auth.signInAnon();
+                                  if (result == null) {
+                                    print(
+                                        "Error while Sign In, please try later.");
+                                  } else {
+                                    print("User is signed in.");
+                                    print(result.uid);
+                                  }
+                                },
+                                child: Container(
+                                  child: Text(
+                                    "Sign as Guest",
+                                    style: TextStyle(color: Colors.grey[400]),
+                                  ),
+                                )),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 25.0),

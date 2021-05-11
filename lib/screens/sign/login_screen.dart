@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:login_screen/assets/colors.dart';
 import 'package:login_screen/assets/textstyle.dart';
 import 'package:login_screen/components/topbar.dart';
-import 'package:login_screen/screens/sign_up_screen.dart';
+import 'package:login_screen/screens/sign/sign_up_screen.dart';
+import 'package:login_screen/services/auth.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,6 +16,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   IconData icon = Icons.visibility;
   bool encodedInput = true;
+
+  final AuthService _auth = AuthService();
+
+  String email = "";
+  String password = "";
 
   void _showPW() {
     setState(() {
@@ -66,6 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20.0),
                         child: TextFormField(
+                          onChanged: (val) {
+                            setState(() {
+                              email = val;
+                            });
+                          },
                           validator: Validators.compose([
                             Validators.email("Inalid email address."),
                             Validators.required("Please enter a email address.")
@@ -92,6 +103,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 // =================================== Password Formfield =================================== \\
                       TextFormField(
+                        onChanged: (val) {
+                          setState(() {
+                            password = val;
+                          });
+                        },
                         validator: Validators.compose([
                           Validators.minLength(8, 'Characters are less than 8'),
                           Validators.required("Please enter a valid password."),
@@ -125,11 +141,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       GestureDetector(
                         onTap: () {
                           if (_formKey.currentState.validate()) {
+                            // what happens if form is validated
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text("Account is created."),
+                                content: Text("locked in"),
                               ),
                             );
+                            print("$email" + " | $password");
                           }
                         },
                         child: Container(

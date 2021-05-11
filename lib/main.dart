@@ -1,7 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:login_screen/components/route_generator.dart';
+import 'package:login_screen/services/route_generator.dart';
+import 'package:login_screen/models/user.dart';
+import 'package:login_screen/screens/wrapper.dart';
+import 'package:login_screen/services/auth.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -24,27 +31,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: myColor,
+    return StreamProvider<AnomUser>.value(
+      value: AuthService().user,
+      initialData: null,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: myColor,
+        ),
+        initialRoute: "/",
+        onGenerateRoute: RouteGenerator.generateRoute,
       ),
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
     );
-  }
-}
-
-class MainBody extends StatefulWidget {
-  MainBody({Key key}) : super(key: key);
-
-  @override
-  _MainBodyState createState() => _MainBodyState();
-}
-
-class _MainBodyState extends State<MainBody> {
-  @override
-  Widget build(BuildContext context) {
-    return MyApp();
   }
 }

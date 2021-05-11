@@ -24,10 +24,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  firebase_core: ^1.1.1
   cupertino_icons: ^1.0.2
   persistent_bottom_nav_bar: any
   carousel_slider: ^3.0.0
   wc_form_validators: ^1.0.0
+  firebase_auth: ^1.1.4
+  provider: ^5.0.0
+  finite_coverflow: ^1.0.0
 
 dev_dependencies:
   flutter_test:

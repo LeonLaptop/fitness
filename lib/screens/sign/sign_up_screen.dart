@@ -6,7 +6,8 @@ import 'package:login_screen/assets/colors.dart';
 import 'package:login_screen/assets/inputFields.dart';
 import 'package:login_screen/assets/textstyle.dart';
 import 'package:login_screen/components/topbar.dart';
-import 'package:login_screen/screens/sign_screen.dart';
+import 'package:login_screen/screens/sign/sign_screen.dart';
+import 'package:login_screen/services/auth.dart';
 import 'package:wc_form_validators/wc_form_validators.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -25,6 +26,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   bool encodedInput = true;
   IconData icon = Icons.visibility;
+  final AuthService _auth = AuthService();
+
+  String user = "";
+  String email = "";
+  String password = "";
 
   void _showPW() {
     setState(() {
@@ -81,6 +87,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20.0),
                           child: TextFormField(
+                            onChanged: (val) {
+                              setState(() {
+                                user = val;
+                              });
+                            },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter a Username!';
@@ -111,8 +122,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20.0),
                           child: TextFormField(
+                            onChanged: (val) {
+                              setState(() {
+                                email = val;
+                              });
+                            },
                             validator: Validators.compose([
-                              Validators.email("Inalid email address."),
+                              Validators.email("Invalid email address."),
                               Validators.required(
                                   "Please enter a email address.")
                             ]),
@@ -138,9 +154,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
 // =================================== Password Formfield =================================== \\
                         TextFormField(
+                          onChanged: (val) {
+                            setState(() {
+                              password = val;
+                            });
+                          },
                           validator: Validators.compose([
-                            Validators.minLength(
-                                8, 'Characters are less than 8'),
+                            Validators.minLength(8,
+                                'Your Password musst be at least 8 characters long.'),
                             Validators.required(
                                 "Please enter a valid password."),
                           ]),
@@ -169,15 +190,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         PasswordRules(),
-// =================================== Password Formfield =================================== \\
+// =================================== Form Button =================================== \\
                         GestureDetector(
                           onTap: () {
                             if (_formKey.currentState.validate()) {
+                              // what happens if form is validated
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("Account is created."),
+                                  content: Text("registered"),
                                 ),
                               );
+                              print("$user" + " | $email" + " | $password");
                             }
                           },
                           child: Container(
@@ -278,7 +301,7 @@ class PasswordRules extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10, bottom: 20.0),
       child: Container(
         width: 300.0,
-        child: Text("Your password must be 8 or more characters long",
+        child: Text("Your password must be 8 or more characters long.",
             style: smallText, textAlign: TextAlign.center),
       ),
     );

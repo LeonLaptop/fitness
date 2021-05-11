@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login_screen/screens/login_screen.dart';
-import 'package:login_screen/screens/sign_screen.dart';
-import 'package:login_screen/screens/sign_up_screen.dart';
+import 'package:login_screen/screens/pages/home_screen.dart';
+import 'package:login_screen/screens/sign/login_screen.dart';
+import 'package:login_screen/screens/sign/sign_screen.dart';
+import 'package:login_screen/screens/sign/sign_up_screen.dart';
+import 'package:login_screen/screens/wrapper.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -9,8 +11,9 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
+        return MaterialPageRoute(builder: (_) => Wrapper());
+      case '/sign':
         return MaterialPageRoute(builder: (_) => SignScreen());
-
       case '/signup':
         if (args is String) {
           return MaterialPageRoute(
@@ -19,6 +22,8 @@ class RouteGenerator {
                   ));
         }
         return _errorRoute();
+      case '/home':
+        return MaterialPageRoute(builder: (_) => HomeScreen());
       case '/login':
         return MaterialPageRoute(builder: (_) => LoginScreen());
 
